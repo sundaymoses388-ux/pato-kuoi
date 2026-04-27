@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pato kuoi media</title>
+  <meta name="description" content="Official website for Your Name - Media Creator from Juba. Follow on Facebook.">
+  <style>
+    :root {
+      --fb-blue: #18f26c; --bg: #f0f2f5; --card: #fff; --text: #1c1e21; 
+      --text-light: #65676b; --border: #dddfe2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: Segoe UI, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    
+    /* Nav */
+    nav { background: var(--card); box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+          position: sticky; top: 0; z-index: 100; }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--fb-blue); }
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; cursor: pointer; }
+    .nav-links a.active, .nav-links a:hover { color: var(--fb-blue); }
+    
+    /* Header */
+    .cover { height: 250px; background: linear-gradient(135deg, var(--fb-blue), #42a5f5); }
+    .profile-section {
+      background: var(--card); margin-top: -70px; border-radius: 8px; 
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2); padding: 20px; text-align: center;
+    }
+    .profile-pic { 
+      width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--card);
+      object-fit: cover; margin: -70px auto 15px;
+    }
+    .profile-section h1 { font-size: 1.8rem; margin-bottom: 5px; }
+    .profile-section p { color: var(--text-light); margin-bottom: 15px; }
+    .fb-btn { 
+      display: inline-flex; align-items: center; gap: 8px; background: var(--fb-blue); 
+      color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; 
+      font-weight: 600;
+    }
+    .fb-btn:hover { background: #166fe5; }
+    
+    /* Sections */
+    section { background: var(--card); border-radius: 8px; padding: 25px; 
+              margin: 20px 0; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    section h2 { font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 10px; 
+                 border-bottom: 1px solid var(--border); }
+    .hide { display: none; }
+    
+    /* Gallery */
+    .gallery-grid { 
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+      gap: 15px; 
+    }
+    .gallery-item { cursor: pointer; border-radius: 8px; overflow: hidden; 
+                    height: 250px; background: var(--bg); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; 
+                        transition: transform 0.3s; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    
+    /* Lightbox */
+    .lightbox { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.9); display: none; justify-content: center; 
+      align-items: center; z-index: 1000; padding: 20px;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+    .close-lightbox { 
+      position: absolute; top: 20px; right: 30px; color: #fff; 
+      font-size: 40px; cursor: pointer; 
+    }
+    
+    /* Contact */
+    .contact-item { display: flex; align-items: center; gap: 12px; margin: 15px 0; }
+    .contact-icon { width: 36px; height: 36px; background: var(--bg); border-radius: 50%;
+                    display: flex; align-items: center; justify-content: center; }
+    
+    /* Footer */
+    footer { text-align: center; padding: 40px 0; color: var(--text-light); }
+    
+    @media (max-width: 600px) {
+      .cover { height: 180px; }
+      .profile-pic { width: 120px; height: 120px; margin: -60px auto 15px; }
+      .profile-section h1 { font-size: 1.5rem; }
+      .nav-links { gap: 15px; font-size: 0.9rem; }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .gallery-item { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-content">
+      <div class="logo">PATO KUOI MEDIA</div>
+      <div class="nav-links">
+        <a onclick="showPage('home')" id="home-link" class="active">Home</a>
+        <a onclick="showPage('gallery')" id="gallery-link">Gallery</a>
+        <a onclick="showPage('contact')" id="contact-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="cover"></div>
+
+  <div class="container">
+    <div class="profile-section">
+      <img src="https://scontent.fnbo19-1.fna.fbcdn.net/v/t39.30808-1/504429280_708494965260849_6287535216724834199_n.jpg?stp=c36.36.428.428a_dst-jpg_s428x428_tt6&_nc_cat=100&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeGCboH0bGXgMnjKI2eKekkpE8vZ3-YDEBATy9nf5gMQEN8lwSPNTA0uriqaUCDBgE7G_cyhBf10eXEZB9HTt9KA&_nc_ohc=2OkbACa5KS8Q7kNvwH5Qrgo&_nc_oc=AdpQ8o8cMWRtaj484r4YFuIKpRLFmHof372aUMSo48mM2loHj55LW3rWTpO2-ReZV1Njk-KRhwtU4LKivojxDTNu&_nc_zt=24&_nc_ht=scontent.fnbo19-1.fna&_nc_gid=9s044swQx_SfmCrzv20Otw&_nc_ss=7f2a8&oh=00_Af3sT-rm7qEX_4e5pci_RiOlSljaJlJ9oaCm5egNOWt_HQ&oe=69F273FD" alt="Profile" class="profile-pic">
+      <h1>LIVE COVERAGE</h1>
+      <p>Media Creator | Juba, South Sudan</p>
+      <a href="https://www.facebook.com/patokuoipage" target="_blank" class="fb-btn">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Follow on Facebook
+      </a>
+    </div>
+
+    <!-- HOME SECTION -->
+    <section id="home">
+      <h2>Welcome to My Page</h2>
+      <p><strong>Pato Kuoi Media</strong>: He operates a widely followed media organization that provides coverage of significant social and political events in South Sudan, particularly in Lakes State. His platform is noted for documenting traditional marriage ceremonies, cultural events, and regional news.
+        Wrestling Peter Drury On social media platforms like TikTok, he has earned the nickname "Wrestling Peter Drury" for his distinct and energetic commentary style, often likened to the famous British sports broadcaster. <br>Public Voice: He is viewed as a "community-centered" media personality who helps audiences feel included in regional stories. </p>
+      <p style="margin-top: 20px;">Follow my Facebook page for daily updates, tutorials, and live sessions in every Wrestling and traditional marriage, events.</p>
+      
+      <h2 style="margin-top: 30px;">Latest Updates</h2>
+      <div style="color: var(--text-light);">
+        <p><strong>April 26, 2026:</strong>BOOK WITH US FOR BUSSINESS PROMOTION OR ANY ANNOUNCEMENT</p>
+        <p style="margin-top: 10px;"><strong></strong> </p>
+      </div>
+    </section>
+<!-- GALLERY SECTION -->
+<section id="gallery" class="hide">
+  <h2>Photo Gallery</h2>
+  <p style="margin-bottom: 20px; color: var(--text-light);">Click any photo to view larger. More photos on my Facebook page.</p>
+  <div class="gallery-grid">
+    <!-- REPLACE THESE WITH YOUR PHOTO URLs -->
+    <div class="gallery-item" onclick="openLightbox('images/p1.jpg')">
+      <img src="images/p3.jpg" alt="poto">
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/eat.jpg')">
+      <img src="images/live2.jpg" alt="on live video">
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/p1.jpg')">
+      <img src="images/p1.jpg" alt="Workshop">
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/p3.jpg')">
+      <img src="images/p6.jpg" alt="Content creation">
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/live2.jpg')">
+      <img src="images/suit.jpg" alt="thong wut">
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/poato l.jpg')">
+      <img src="images/arse.jpg" alt="Speaking event">
+    </div>
+  </div>
+</section>
+
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="hide">
+      <h2>Contact Me</h2>
+      <p>Have a question or want to collaborate? Reach out below:</p>
+      
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <strong>Email</strong><br>
+          <a href="mailto:patokuoi@email.com">patokoui@email.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <strong>WhatsApp</strong><br>
+          <a href="https://wa.me/211924333727" target="_blank">+211 924333727</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <strong>Location</strong><br>
+          Juba, South Sudan
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">👍</div>
+        <div>
+          <strong>Facebook</strong><br>
+          <a href="https://www.facebook.com/patokuoipage" target="_blank">https://www.facebook.com/patokuoipage</a>
+        </div>
+      </div>
+
+      <a href="https://facebook.com/PATO KUOI MEDIA" target="_blank" class="fb-btn" style="margin-top: 20px; width: 100%; justify-content: center;">
+        Message Me on Facebook
+      </a>
+    </section>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 PATO KUOI MEDIA. Connect with me on Facebook.</p>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(page) {
+      document.getElementById('home').classList.add('hide');
+      document.getElementById('gallery').classList.add('hide');
+      document.getElementById('contact').classList.add('hide');
+      document.getElementById('home-link').classList.remove('active');
+      document.getElementById('gallery-link').classList.remove('active');
+      document.getElementById('contact-link').classList.remove('active');
+      
+      document.getElementById(page).classList.remove('hide');
+      document.getElementById(page + '-link').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
